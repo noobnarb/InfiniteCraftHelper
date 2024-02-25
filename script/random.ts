@@ -13,12 +13,13 @@ export function init(elements: elements) {
 	elements.sideControls.appendChild(randomImage);
 	randomImage.addEventListener('click', (e) => {
 		unsafeWindow.$nuxt.$root.$children[2].$children[0].$children[0].playInstanceSound();
-		const randomElement =
-			unsafeWindow.$nuxt.$root.$children[2].$children[0].$children[0]._data.elements[
-				Math.floor(
-					Math.random() * unsafeWindow.$nuxt.$root.$children[2].$children[0].$children[0]._data.elements.length,
-				)
-			];
+		let testRandomElement;
+		do {
+		    const randomIndex = Math.floor(Math.random() * unsafeWindow.$nuxt.$root.$children[2].$children[0].$children[0]._data.elements.length);
+		    testRandomElement = unsafeWindow.$nuxt.$root.$children[2].$children[0].$children[0]._data.elements[randomIndex];
+		} while (/\d/.test(testRandomElement.text));
+		
+		const randomElement = testRandomElement;
 		const data = {
 			id: unsafeWindow.$nuxt.$root.$children[2].$children[0].$children[0]._data.instanceId++,
 			text: randomElement.text,
